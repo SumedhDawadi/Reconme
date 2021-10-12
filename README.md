@@ -17,7 +17,7 @@
    ```sh
    chmod +x install.sh
    
-3. Rn via
+3. Run via
    ```sh
    chmod +x reconme.sh
    ./reconme
