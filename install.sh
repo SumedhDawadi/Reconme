@@ -69,6 +69,16 @@ select choice in "${choices[@]}"; do
         esac
 done
 fi
+
+#create content-discovery, subdomain, and other directories
+echo "Creating /opt/tools/subdomain-enum"
+mkdir /opt/tools/subdomain-enum
+echo "Creating /opt/tools/content-discovery"
+mkdir /opt/tools/content-discovery
+echo "Creating /opt/tools/other"
+mkdir /opt/tools/other 
+
+
 echo "Checking if the Tool called Nuclei is installed in your system or not"
 echo
 if ! command -v nuclei &> /dev/null
@@ -91,10 +101,43 @@ else
 fi
 
 
-echo "Checking if assertfinder is installed in your system or not"
-if ! command -v assetfinder &> /dev/null
-then
-        go get -u github.com/tomnomnom/assetfinder && cp assetfinder
-else
-        echo "Assetfinder is alreay installed in your system"
-fi
+echo "Installing subfinder"
+git clone https://github.com/subfinder/subfinder.git /opt/tools/subdomain-enum/subfinder
+cd /opt/tools/subdomain-enum/subfinder
+go get github.com/subfinder/subfinder
+echo "done"
+
+
+#install subjs
+echo "installing subjs"
+go get -u github.com/lc/subjs
+echo "done"
+
+
+#insatlling wayback
+echo "installing waybackMachine"
+git clone https://github.com/ghostlulzhacks/waybackMachine.git /opt/tools/content-discovery/crawlers/waybackMachine
+echo "done"
+
+
+
+echo "installing ffuf"
+go get github.com/ffuf/ffuf
+echo "done"
+
+
+
+#install httprobe
+echo "installing httprobe"
+go get -u github.com/tomnomnom/httprobe
+echo "done"
+
+
+#install Seclists
+echo "downloading Seclist"
+git clone https://github.com/danielmiessler/SecLists.git /usr/share/wordlists/
+echo "done"
+
+
+
+
