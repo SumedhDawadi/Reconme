@@ -34,11 +34,41 @@ echo "Assetfinder"
 
 printf "${GREEN}\n"
 
-if [ ! command -v go  -o  ! command -v golang   &> /dev/null
-then
-        apt install golang
-fi
+mkdir /opt/tool
+echo "done"
 
+#Installing Go-Language
+
+if [[ -z "$GOPATH" ]];then
+echo "It looks like go is not installed, would you like to install it now"
+PS3="Please select an option : "
+choices=("yes" "no")
+select choice in "${choices[@]}"; do
+        case $choice in
+                yes)
+
+                                        echo "Installing Golang"
+                                        wget https://dl.google.com/go/https://golang.org/dl/go1.17.2.linux-amd64.tar.gz
+                                        sudo tar -xvf https://golang.org/dl/go1.17.2.linux-amd64.tar.gz
+                                        sudo mv go /usr/local
+                                        export GOROOT=/usr/local/go
+                                        export GOPATH=$HOME/go
+                                        export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+                                        echo 'export GOROOT=/usr/local/go' >> ~/.bash_profile
+                                        echo 'export GOPATH=$HOME/go'   >> ~/.bash_profil
+                                        echo 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH' >> ~/.bash_profile
+                                        source ~/.bash_profile
+                                        sleep 1
+                                        break
+                                        ;;
+                                no)
+                                        echo "Please install go and rerun this script"
+                                        echo "Aborting installation..."
+                                        exit 1
+                                        ;;
+        esac
+done
+fi
 echo "Checking if the Tool called Nuclei is installed in your system or not"
 echo
 if ! command -v nuclei &> /dev/null
