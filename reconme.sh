@@ -35,6 +35,10 @@ mkdir /opt/tool
 echo "done"
 
 #Installing Go-Language
+mkdir /opt/tool
+echo "done"
+
+#Installing Go-Language
 
 if [[ -z "$GOPATH" ]];then
 echo "It looks like go is not installed, would you like to install it now"
@@ -66,6 +70,7 @@ select choice in "${choices[@]}"; do
         esac
 done
 fi
+
 
 echo "Checking if the Tool called Nuclei is installed in your system or not"
 echo
