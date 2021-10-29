@@ -24,7 +24,11 @@ echo """
                           Twitter : https://twitter.com/MrExpl0it/
                           Disclaimer: I dont promote any illegal activity
 """
-
+#!/bin/bash
+if [[ $(id -u) != 0 ]]; then
+    echo -e "\n[!] Install.sh requires root privileges"
+    exit 0
+fi
 echo "Tools that will be installed in your system are : "
 printf "${BLUE}\n"
 echo "GO-land"
