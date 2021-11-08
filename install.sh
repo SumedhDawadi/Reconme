@@ -38,8 +38,7 @@ echo "Assetfinder"
 
 printf "${GREEN}\n"
 
-mkdir /opt/tool
-echo "done"
+
 
 #Installing Go-Language
 
@@ -52,7 +51,7 @@ select choice in "${choices[@]}"; do
                 yes)
 
                                         echo "Installing Golang"
-                                        wget https://dl.google.com/go/https://golang.org/dl/go1.17.2.linux-amd64.tar.gz
+                                        wget https://dl.google.com/go/https://golang.org/dl/go1.17.3.linux-amd64.tar.gz  
                                         sudo tar -xvf https://golang.org/dl/go1.17.2.linux-amd64.tar.gz
                                         sudo mv go /usr/local
                                         export GOROOT=/usr/local/go
@@ -74,67 +73,7 @@ select choice in "${choices[@]}"; do
 done
 fi
 
-#create content-discovery, subdomain, and other directories
-echo "Creating /opt/tools/subdomain-enum"
-mkdir /opt/tools/subdomain-enum
-echo "Creating /opt/tools/content-discovery"
-mkdir /opt/tools/content-discovery
-echo "Creating /opt/tools/other"
-mkdir /opt/tools/other 
 
-
-echo "Checking if the Tool called Nuclei is installed in your system or not"
-echo
-if ! command -v nuclei &> /dev/null
-then
-        GO111MODULE=on go get -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei
-else
-echo
-        echo "Nuclie is already installed in your system."
-
-fi
-echo
-echo "Checking if the Sublist3r is installed in your system or not"
-if ! command -v sublist3r &> /dev/null
-then
-        git clone  https://github.com/aboul3la/Sublist3r.git && cd Sublist3r && python3 setup.py install &&cd $OLDPWD && rm -rf Sublist3r
-
-else
-        echo "Sublist3r is alreay installed in your system"
-
-fi
-
-
-echo "Installing subfinder"
-git clone https://github.com/subfinder/subfinder.git /opt/tools/subdomain-enum/subfinder
-cd /opt/tools/subdomain-enum/subfinder
-go get github.com/subfinder/subfinder
-echo "done"
-
-
-#install subjs
-echo "installing subjs"
-go get -u github.com/lc/subjs
-echo "done"
-
-
-#insatlling wayback
-echo "installing waybackMachine"
-git clone https://github.com/ghostlulzhacks/waybackMachine.git /opt/tools/content-discovery/crawlers/waybackMachine
-echo "done"
-
-
-
-echo "installing ffuf"
-go get github.com/ffuf/ffuf
-echo "done"
-
-
-
-#install httprobe
-echo "installing httprobe"
-go get -u github.com/tomnomnom/httprobe
-echo "done"
 
 
 #install Seclists
