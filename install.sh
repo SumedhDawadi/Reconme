@@ -1,9 +1,7 @@
 
-
-
 #!/bin/bash
-home='cd /opt'
-'echo $home'
+
+
 
 RED='\033[0;31m'
 NC='\033[0m' # No Color
@@ -22,19 +20,17 @@ echo """
 ╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝╚══════╝
                           Author  : Sumedh Dawadi
                           Twitter : https://twitter.com/MrExpl0it/
-                          Disclaimer: I dont promote any illegal activity
+                          Disclaimer: Use of this tool for attacking targets without prior mutual consent is illegal
 """
-#!/bin/bash
+#ROOT PRIVELEX
+
 if [[ $(id -u) != 0 ]]; then
     echo -e "\n[!] Install.sh requires root privileges"
     exit 0
 fi
 echo "Tools that will be installed in your system are : "
 printf "${BLUE}\n"
-echo "GO-land"
-echo "Nuclei"
-echo "Sublist3r"
-echo "Assetfinder"
+
 
 printf "${GREEN}\n"
 
@@ -74,12 +70,63 @@ done
 fi
 
 
+echo "Installing Subfinder"
+
+if [ ! -e /root/go/bin/subfinder ];then
+          go get -u github.com/projectdiscovery/subfinder/v2/cmd/subfinder
+
+        ln -sfv /root/go/bin/./subfinder /usr/bin/sunfinder
+else
+        echo "subfinder is already Installed"
+fi
 
 
-#install Seclists
-echo "downloading Seclist"
-git clone https://github.com/danielmiessler/SecLists.git /usr/share/wordlists/
-echo "done"
+#Installing httprobe
+echo "Installing httprobe"
+if [ ! -e /usr/bin/httprobe ];then
+        go get -u github.com/tomnomnom/httprobe
+        ln -sfv /root/go/bin/./httprobe /usr/bin/httprobe
+else
+        echo "Httprobe is already installed"
+fi
+
+#Installing asserfinder
+echo "Installing assetfinder"
+if [ ! -e /root/go/bin/assetfinder ];then
+        go get -u github.com/tomnomnom/assetfinder
+        ln -sfv /root/go/bin/./assetfinder /usr/bin/assetfinder
+else
+        echo "Assetfinder is already Installed"
+fi
+
+
+#Installing AMASS
+if [ ! -e /usr/bin/amass ];then
+        go get -v github.com/OWASP/Amass/v3/...
+else
+        echo "Amass is already installed"
+fi
+
+#Installing Dalfox
+echo "Installing Dalfox"
+if [ ! -e /root/go/bin/assetfinder ];then
+         go get -u github.com/hahwul/dalfox
+
+        ln -sfv /root/go/bin/./dalfox /usr/bin/dalfox
+else
+        echo "Dalfox is already Installed"
+fi
+
+#Installing GAU
+echo "Installing gau"
+if [ ! -e /root/go/bin/gau ];then
+          go get -u  github.com/lc/gau
+
+        ln -sfv /root/go/bin/./gau /usr/bin/gau
+else
+        echo "GAU is already Installed"
+fi
+
 
 
 
