@@ -1,8 +1,5 @@
 
 #!/bin/bash
-
-
-
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 GREEN='\033[0;32m'
@@ -29,7 +26,7 @@ if [[ $(id -u) != 0 ]]; then
     exit 0
 fi
 echo "Tools that will be installed in your system are : "
-printf "${BLUE}\n"
+
 
 
 printf "${GREEN}\n"
@@ -128,6 +125,40 @@ else
 fi
 
 
+echo "Installing waybackurls"
+if [ ! -e /root/go/bin/waybackurls ];then
+        go get -u github.com/tomnomnom/waybackurls
+        ln -sfv /root/go/bin/./waybackurls /usr/bin/waybackurls
+else
+        echo "waybackurls is already Installed"
+fi
 
+
+go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
+
+
+
+echo "Installing httpx"
+if [ ! -e /root/go/bin/httpx ];then
+        go get -u github.com/projectdiscovery/httpx/cmd/httpx@latest
+        ln -sfv /root/go/bin/./httpx /usr/bin/httpx
+else
+        echo "httpx is already Installed"
+fi
+
+echo "Installing Dirsearch"
+if [ ! -e /usr/bin/dirsearch ];then
+        sudo apt install dirsearch
+else
+        echo "dirsearch is already installed"
+fi
+
+echo "Installing Dnsrecon"
+
+if [ ! -e /usr/bin/dnsrecon ];then
+        sudo apt install dnsrecon
+else
+        echo "dnsrecon is already installed"
+fi
 
 
