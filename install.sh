@@ -133,11 +133,6 @@ else
         echo "waybackurls is already Installed"
 fi
 
-
-go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
-
-
-
 echo "Installing httpx"
 if [ ! -e /root/go/bin/httpx ];then
         go get -u github.com/projectdiscovery/httpx/cmd/httpx@latest
